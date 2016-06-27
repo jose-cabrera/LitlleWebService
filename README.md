@@ -16,3 +16,8 @@ Aprenderan sobre el uso de:
 - Consumo de WebServices
 - Manejo de la base de datos
 - MVP + Clear
+
+
+Como primer punto deben de consumir el API de GitHub, para obtner los repositorios de cualquier usuario.
+Esto lo haran utilizando RetroFit, como primera parte y luego esto sera guardado en una base de datos, 
+llamada Realm
