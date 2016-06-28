@@ -23,10 +23,13 @@ public class RepositoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository);
+        //TODO: Agregar en el content_repository.xml Un RecyclerView, que este pegado al
+        // tope del RelativeLayout, y que ocupe todo el espacio disponible que tiene del papa.
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        
     }
 
     @OnClick(R.id.fab)
