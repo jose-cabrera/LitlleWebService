@@ -108,8 +108,7 @@ public class AddPersonFragment extends DialogFragment implements DialogInterface
                 @Override
                 public void onClick(View v) {
 
-                    //TODO: Guardar aqui el nombre del usuario agregado
-                    //Utilizando los metodos que estan arriba sin utilizar
+                    //TODO: Guardar aqui el nombre del usuario agregad Utilizando los metodos que estan arriba sin utilizar, Guardarlo en un Array de Strings, si el array existe verificar que no exista el usuario que se esta agregando
 
                 }
             });

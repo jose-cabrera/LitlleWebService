@@ -7,6 +7,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.das.jospablo.littewebservice.R;
 import com.das.jospablo.littewebservice.addperson.AddPersonFragment;
+import com.das.jospablo.littewebservice.events.UserAdded;
+import com.das.jospablo.littewebservice.lib.EventBus;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +23,8 @@ public class RepositoryActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    EventBus eventBus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +35,19 @@ public class RepositoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        
+        eventBus.register(this);
     }
 
     @OnClick(R.id.fab)
     public void onClick() {
         new AddPersonFragment().show(getSupportFragmentManager(), getString(R.string.addPerson_title));
     }
+
+    @Subscribe
+    public void onEvent(UserAdded event){
+
+
+
+    }
+
 }
