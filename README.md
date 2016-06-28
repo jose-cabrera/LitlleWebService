@@ -20,4 +20,7 @@ Aprenderan sobre el uso de:
 
 Como primer punto deben de consumir el API de GitHub, para obtner los repositorios de cualquier usuario.
 Esto lo haran utilizando RetroFit, como primera parte y luego esto sera guardado en una base de datos, 
-llamada Realm
+llamada Realm.
+
+//repositorys.Adapter
+TODO: Agregar Funcionalidad al metodo de onBindViewHolder, add, getItemCount,
