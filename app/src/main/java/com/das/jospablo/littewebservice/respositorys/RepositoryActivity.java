@@ -46,6 +46,7 @@ public class RepositoryActivity extends AppCompatActivity {
     @Subscribe
     public void onEvent(UserAdded event){
 
+        //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este
 
 
     }
