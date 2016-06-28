@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LitteWebService</string>
     <string name="title_activity_repository">RepositoryActivity</string>
+    <string name="login.message.email">Usuario GitHub</string>
+    <string name="addPerson_title">Agregar usuario GitHub</string>
+    <string name="adduser_message_add">Agregar</string>
+    <string name="adduser_message_cancel">Cancelar</string>
+    <string name="adduser_message_contactadded">Usuario Agregado</string>
+    <string name="adduser_error_message">Error al agregar usuario</string>
 </resources>
