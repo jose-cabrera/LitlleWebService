@@ -110,10 +110,8 @@ public class AddPersonFragment extends DialogFragment implements DialogInterface
                 @Override
                 public void onClick(View v) {
 
-                    //TODO: Guardar aqui el nombre del usuario agregad Utilizando los metodos que estan arriba sin utilizar.
-
-                    //TODO: Ejecutar un evento de GreenRobot, diciendo que el usuario fue agregado.
-//                    GreenRobotEventBus.getInstance().post(new UserAdded(EditText.getText().toString()));
+                    contactAdded();
+                    GreenRobotEventBus.getInstance().post(new UserAdded(editTxtEmail.getText().toString()));
                 }
             });
 
