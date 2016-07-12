@@ -3,6 +3,8 @@ package com.das.jospablo.littewebservice.respositorys;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.das.jospablo.littewebservice.R;
@@ -41,6 +43,16 @@ public class RepositoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         eventBus.register(this);
+    }
+
+    private void setRecyclerView(List<Repo> repos){
+        //TODO: Aqui Agregar el LayoutManager
+//        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        //TODO: Iniciar el Adapter con la lista
+        // new Adapter(repos)
+        //TODO: Setearselo al reciclerView
+        //reciclerview.setLayoutManager
+        //reciclerview.setAdpter;
     }
 
     @OnClick(R.id.fab)
