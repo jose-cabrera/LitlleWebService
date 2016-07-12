@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by JoséPablo on 24/06/16.
- * Repo POJO
+ * Repo Plain Old Java Object POJO
  */
 public class Repo {
 

@@ -7,14 +7,19 @@ import android.support.v7.widget.Toolbar;
 
 import com.das.jospablo.littewebservice.R;
 import com.das.jospablo.littewebservice.addperson.AddPersonFragment;
+import com.das.jospablo.littewebservice.entity.Repo;
 import com.das.jospablo.littewebservice.events.UserAdded;
 import com.das.jospablo.littewebservice.lib.EventBus;
+import com.das.jospablo.littewebservice.webservice.RetroFitService;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
 
 public class RepositoryActivity extends AppCompatActivity {
 
@@ -48,6 +53,7 @@ public class RepositoryActivity extends AppCompatActivity {
 
         //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este
 
+        Call<List<Repo>> repos = RetroFitService.getInstance().listRepos("jose-cabrera");
 
     }
 
