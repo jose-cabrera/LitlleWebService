@@ -17,6 +17,33 @@ public class Repo {
     private String description;
     private boolean fork;
     private String url;
+    private String created_at;
+    private String updated_at;
+    private String git_url;
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public String getGit_url() {
+        return git_url;
+    }
+
+    public void setGit_url(String git_url) {
+        this.git_url = git_url;
+    }
 
     public int getId() {
         return id;
