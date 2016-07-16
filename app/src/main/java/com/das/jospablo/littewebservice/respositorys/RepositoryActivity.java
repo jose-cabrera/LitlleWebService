@@ -71,13 +71,15 @@ public class RepositoryActivity extends AppCompatActivity {
 
         //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este
 
-        Call<List<Repo>> repos = RetroFitService.getInstance().listRepos(event.getUser());
-        repos.enqueue(new Callback<List<Repo>>() {
+        Call<List<Repo>> call = RetroFitService.getInstance().listRepos(event.getUser());
+        call.enqueue(new Callback<List<Repo>>() {
             @Override
             public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
                 try{
 
-                    setRecyclerView(response.body());
+                    List<Repo> repos = response.body();
+
+                    setRecyclerView(repos);
 
                 } catch (Exception e){
                     e.printStackTrace();
