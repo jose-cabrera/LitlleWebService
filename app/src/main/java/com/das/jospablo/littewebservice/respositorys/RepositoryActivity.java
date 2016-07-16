@@ -23,6 +23,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RepositoryActivity extends AppCompatActivity {
 
@@ -69,13 +71,24 @@ public class RepositoryActivity extends AppCompatActivity {
 
         //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este
 
-        Call<List<Repo>> repos = RetroFitService.getInstance().listRepos("jose-cabrera");
+        Call<List<Repo>> repos = RetroFitService.getInstance().listRepos(event.getUser());
+        repos.enqueue(new Callback<List<Repo>>() {
+            @Override
+            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                try{
 
-        try{
-            setRecyclerView((List<Repo>) repos.request().body());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+                    setRecyclerView(response.body());
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Repo>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 
