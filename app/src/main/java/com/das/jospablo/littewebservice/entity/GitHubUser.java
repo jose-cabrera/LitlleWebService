@@ -18,6 +18,7 @@ public class GitHubUser extends RealmObject{
     private String email;
     private String created_at;
 
+
     public String getLogin() {
         return login;
     }
