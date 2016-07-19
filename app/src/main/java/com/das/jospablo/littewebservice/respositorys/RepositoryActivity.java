@@ -12,6 +12,7 @@ import com.das.jospablo.littewebservice.addperson.AddPersonFragment;
 import com.das.jospablo.littewebservice.entity.Repo;
 import com.das.jospablo.littewebservice.events.UserAdded;
 import com.das.jospablo.littewebservice.lib.EventBus;
+import com.das.jospablo.littewebservice.lib.GreenRobotEventBus;
 import com.das.jospablo.littewebservice.webservice.RetroFitService;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -22,13 +23,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RepositoryActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.recyclerview)
+    RecyclerView recyclerview;
 
-    EventBus eventBus;
+    public static final String EXTRA_USER_ID = "KEY_EXTRA_USER_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +45,44 @@ public class RepositoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        eventBus.register(this);
+
+
     }
 
-    private void setRecyclerView(List<Repo> repos){
+    private void setRecyclerView(List<Repo> repos) {
         //TODO: Aqui Agregar el LayoutManager
-//        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         //TODO: Iniciar el Adapter con la lista
-        // new Adapter(repos)
+        Adapter adapter = new Adapter(repos);
         //TODO: Setearselo al reciclerView
-        //reciclerview.setLayoutManager
-        //reciclerview.setAdpter;
+        recyclerview.setLayoutManager(manager);
+        recyclerview.setAdapter(adapter);
     }
 
-    @Subscribe
-    public void onEvent(UserAdded event){
+    public void onEvent(UserAdded event) {
 
         //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este
 
-        Call<List<Repo>> repos = RetroFitService.getInstance().listRepos("jose-cabrera");
+        Call<List<Repo>> call = RetroFitService.getInstance().listRepos(event.getUser());
+        call.enqueue(new Callback<List<Repo>>() {
+            @Override
+            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                try{
+
+                    List<Repo> repos = response.body();
+
+                    setRecyclerView(repos);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Repo>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
     }
 

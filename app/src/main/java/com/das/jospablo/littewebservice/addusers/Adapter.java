@@ -4,13 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.das.jospablo.littewebservice.R;
-import com.das.jospablo.littewebservice.entity.Repo;
+import com.das.jospablo.littewebservice.entity.GitHubUser;
+import com.das.jospablo.littewebservice.lib.ImageLoader;
 
-import java.util.List;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 
 /**
  * Created by josepablocabreragarcia on 13/06/16.
@@ -18,42 +21,43 @@ import butterknife.ButterKnife;
  */
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    List<Repo> repos;
+    RealmResults<GitHubUser> users;
+    private ImageLoader imageLoader;
 
-    public Adapter(List<Repo> repoList) {
-        this.repos = repoList;
+    public Adapter(RealmResults<GitHubUser> users, ImageLoader imageLoader) {
+        this.users = users;
+        this.imageLoader = imageLoader;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //TODO: Agregar en la vista, lo siguiente:
-        // TextView para el name
-        // TextView para el full_name
-        // TextView para el URL
-
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content_repository, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content_githubuser, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //TODO: Obtener el objeto de la lista en la position obtenida, y del objeto Repo llenar
-        // El Holder con cada uno de sus atribuos.
+        GitHubUser user = users.get(position);
+
+        holder.name.setText(user.getName());
+        imageLoader.load(holder.avatar, user.getAvatar_url());
     }
 
     @Override
     public int getItemCount() {
 
-        //TODO: Cambiar para retornar el tamaño de la lista
-
-        return 0;
-
+        if (users != null)
+            return users.size();
+        else
+            return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //TODO: Aqui Agregar las injecciones de ButterKnife de forma manual, despues de agregar las vistas en
-        // R.layout.item_content_repository
+        @BindView(R.id.avatar)
+        ImageView avatar;
+        @BindView(R.id.name)
+        TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
