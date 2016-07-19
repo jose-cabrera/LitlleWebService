@@ -1,5 +1,6 @@
 package com.das.jospablo.littewebservice.webservice;
 
+import com.das.jospablo.littewebservice.entity.GitHubUser;
 import com.das.jospablo.littewebservice.entity.Repo;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface GitHubApi {
     @GET("users/{user}/repos")
     Call<List<Repo>> listRepos(@Path("user") String user);
 
+    @GET("users/{user}")
+    Call<GitHubUser> getUserInfo(@Path("user") String user);
 }

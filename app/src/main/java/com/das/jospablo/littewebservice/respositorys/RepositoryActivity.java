@@ -30,12 +30,10 @@ public class RepositoryActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
 
-    EventBus eventBus;
+    public static final String EXTRA_USER_ID = "KEY_EXTRA_USER_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +45,8 @@ public class RepositoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        eventBus = GreenRobotEventBus.getInstance();
-        eventBus.register(this);
+
+
     }
 
     private void setRecyclerView(List<Repo> repos) {
@@ -61,12 +59,6 @@ public class RepositoryActivity extends AppCompatActivity {
         recyclerview.setAdapter(adapter);
     }
 
-    @OnClick(R.id.fab)
-    public void onClick() {
-        new AddPersonFragment().show(getSupportFragmentManager(), getString(R.string.addPerson_title));
-    }
-
-    @Subscribe
     public void onEvent(UserAdded event) {
 
         //TODO: Aqui deben de leer la lista de usuarios que esta en los shareprefs y ejecutar el servicio de RetroFit, una vez este

@@ -83,7 +83,7 @@ public class AddPersonFragment extends DialogFragment implements DialogInterface
     }
 
     public void contactAdded() {
-        Toast.makeText(getActivity(), R.string.adduser_message_contactadded, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), R.string.adduser_message_contactadded, Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
