@@ -1,5 +1,6 @@
 package com.das.jospablo.littewebservice.addusers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import com.das.jospablo.littewebservice.R;
 import com.das.jospablo.littewebservice.addperson.AddPersonFragment;
 import com.das.jospablo.littewebservice.addusers.asynctasks.DonwloadUserInfo;
+import com.das.jospablo.littewebservice.addusers.services.AddReposService;
 import com.das.jospablo.littewebservice.database.OpenRealm;
 import com.das.jospablo.littewebservice.entity.GitHubUser;
 import com.das.jospablo.littewebservice.events.UserAdded;
@@ -17,6 +19,7 @@ import com.das.jospablo.littewebservice.lib.EventBus;
 import com.das.jospablo.littewebservice.lib.GlideImageLoader;
 import com.das.jospablo.littewebservice.lib.GreenRobotEventBus;
 import com.das.jospablo.littewebservice.lib.ImageLoader;
+import com.das.jospablo.littewebservice.userdetail.UserDetailActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -25,10 +28,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 
-public class AddGitHubUsersActivity extends AppCompatActivity implements DonwloadUserInfo.userDonwloaded {
+public class AddGitHubUsersActivity extends AppCompatActivity implements DonwloadUserInfo.userDonwloaded, Adapter.onClick {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -75,7 +77,7 @@ public class AddGitHubUsersActivity extends AppCompatActivity implements Donwloa
 
     private void setRecyclerView(RealmResults<GitHubUser> users) {
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        adapter = new Adapter(users, imageLoader);
+        adapter = new Adapter(users, imageLoader, this);
         recyclerview.setAdapter(adapter);
     }
 
@@ -95,12 +97,25 @@ public class AddGitHubUsersActivity extends AppCompatActivity implements Donwloa
     @Override
     public void userAded(GitHubUser user) {
 
-        if (realm == null)
-            realm = Realm.getDefaultInstance();
+        if (user != null) {
+            if (realm == null)
+                realm = Realm.getDefaultInstance();
 
-        realm.beginTransaction();
-        realm.copyToRealm(user);
-        realm.commitTransaction();
+            realm.beginTransaction();
+            realm.copyToRealm(user);
+            realm.commitTransaction();
 
+            Intent service = new Intent(this, AddReposService.class);
+            service.putExtra(AddReposService.EXTRA_USER_ID, user.getLogin());
+            startService(service);
+        }
+
+    }
+
+    @Override
+    public void onClick(String usuario) {
+        Intent intent = new Intent(this, UserDetailActivity.class);
+        intent.putExtra(UserDetailActivity.EXTRA_KEY, usuario);
+        startActivity(intent);
     }
 }

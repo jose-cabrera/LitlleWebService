@@ -23,10 +23,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     RealmResults<GitHubUser> users;
     private ImageLoader imageLoader;
+    private onClick listener;
 
-    public Adapter(RealmResults<GitHubUser> users, ImageLoader imageLoader) {
+    public Adapter(RealmResults<GitHubUser> users, ImageLoader imageLoader, onClick listener) {
         this.users = users;
         this.imageLoader = imageLoader;
+        this.listener = listener;
     }
 
     @Override
@@ -37,10 +39,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        GitHubUser user = users.get(position);
+        final GitHubUser user = users.get(position);
 
         holder.name.setText(user.getName());
         imageLoader.load(holder.avatar, user.getAvatar_url());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClick(user.getLogin());
+            }
+        });
     }
 
     @Override
@@ -59,10 +67,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         @BindView(R.id.name)
         TextView name;
 
+        View itemView;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.itemView = itemView;
         }
+    }
+
+    public interface onClick{
+        void onClick(String usuario);
     }
 
 }

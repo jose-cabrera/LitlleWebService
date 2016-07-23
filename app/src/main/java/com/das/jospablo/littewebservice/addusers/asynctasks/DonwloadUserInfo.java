@@ -35,6 +35,9 @@ public class DonwloadUserInfo extends AsyncTask<String, Void, GitHubUser> {
 
         try{
             Response<GitHubUser> user = RetroFitService.getInstance().getUserInfo(params[0]).execute();
+
+
+
             return user.body();
         }catch (Exception e) {
             e.printStackTrace();

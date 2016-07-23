@@ -9,4 +9,6 @@
     <string name="adduser_message_contactadded">Usuario Agregado</string>
     <string name="adduser_error_message">Error al agregar usuario</string>
     <string name="descargando_usuario">Descargando Usuario</string>
+    <string name="detalle_usuario">Detalle Usuario</string>
+    <string name="ir_repositorios">Ver repositorios</string>
 </resources>

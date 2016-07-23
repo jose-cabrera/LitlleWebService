@@ -1,11 +1,14 @@
 package com.das.jospablo.littewebservice.entity;
 
+import java.util.ArrayList;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
  * Created by JoséPablo on 15/07/16.
  */
-public class GitHubUser extends RealmObject{
+public class GitHubUser extends RealmObject {
 
     private String login;
     private int id;
@@ -17,6 +20,15 @@ public class GitHubUser extends RealmObject{
     private String location;
     private String email;
     private String created_at;
+    private RealmList<Repo> repositorios;
+
+    public RealmList<Repo> getRepositorios() {
+        return repositorios;
+    }
+
+    public void setRepositorios(RealmList<Repo> repositorios) {
+        this.repositorios = repositorios;
+    }
 
     public String getLogin() {
         return login;

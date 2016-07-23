@@ -9,10 +9,9 @@ import android.widget.TextView;
 import com.das.jospablo.littewebservice.R;
 import com.das.jospablo.littewebservice.entity.Repo;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 
 /**
  * Created by josepablocabreragarcia on 13/06/16.
@@ -20,9 +19,9 @@ import butterknife.ButterKnife;
  */
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    List<Repo> repos;
+    RealmList<Repo> repos;
 
-    public Adapter(List<Repo> repoList) {
+    public Adapter(RealmList<Repo> repoList) {
         this.repos = repoList;
     }
 
