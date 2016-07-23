@@ -95,11 +95,19 @@ public class AddGitHubUsersActivity extends AppCompatActivity implements Donwloa
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        eventBus.unregistrer(this);
+    }
+
+    @Override
     public void userAded(GitHubUser user) {
 
         if (user != null) {
             if (realm == null)
                 realm = Realm.getDefaultInstance();
+
+            RealmResults<GitHubUser> users = realm.where(GitHubUser.class).findAll();
 
             realm.beginTransaction();
             realm.copyToRealm(user);
